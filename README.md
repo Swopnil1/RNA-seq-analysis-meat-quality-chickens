@@ -1,1 +1,35 @@
-# RNA_seq_analysis
+# RNA-sequencing pipeline and differential gene expression anaylsis
+
+Swopnil Pradhan
+
+Octotber 1, 2025
+
+## Introduction
+RNA sequencing is a high throughput technique used to study the transcriptome (the complete set of RNA molecules within a cell at a given time). 
+
+RNA-seq analysis applications includes:
+  1. Gene expression profiling
+    Identifying genes which are upregulated or downregulated in response to particular treatment or condition.
+  2. Disease research
+    Identfying biomarkers or molecular mechanisms in cancer, neurological disorders and infections. Understanding the effects of treating organisms with therapeutics. 
+  3.   Alternative splicing analysis
+     Understanding different isoforms produced from the same gene.
+
+The analysis explained below is mainly for identifying differentially expressed genes and discovering underlying pathways and mechanisms which can affect meat quality of two different muscle types breast (B) and Leg (L) in two different strains of chicken namely Chinese Dagu chicken (DG) and AA+ broiler roosters (AA). 
+
+## Obtaining raw data from SRA
+
+The dataset which we will be working with comes from (Zhu et al., 2024). To find the raw sequencing data, we can navigate through the SRA explorer https://sra-explorer.info/.  The sequencing data can be accessed through entering the Bioproject accession number **PRJNA1051785** in the SRA explorer. 
+
+<img width="1440" height="813" alt="image" src="https://github.com/user-attachments/assets/fe04fb89-99e9-4124-b43f-5c705b03ef7d" />
+
+Steps to follow after entering PRJNA105178. 
+Click "Title" checkbox to select all the samples -> Add to collection -> 12 saved datasets -> SRA downloads -> Download "Bash script for downloading SRA files (nice filenames)" -> Run the 
+script sra_explorer_sra_download.sh 
+
+> (Optional)
+You can also utilize GNU parallel to simultaneously download multiple files at once.
+```
+cat sra_explorer_sra_download.sh  | parallel -j 8 
+```
+
