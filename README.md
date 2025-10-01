@@ -32,4 +32,7 @@ You can also utilize GNU parallel to simultaneously download multiple files at o
 ```
 cat sra_explorer_sra_download.sh  | parallel -j 8 
 ```
+The raw data is in FASTQ format which is required for bulk RNA-sequencing analysis. 
+The FASTQ file format stores nucleotide sequences with corresponding quality scores primarily used for raw sequencing reads from NGS platforms where quality of each base matters. 
+
 
