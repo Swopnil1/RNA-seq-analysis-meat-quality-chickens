@@ -74,3 +74,4 @@ gunzip Gallus_gallus.bGalGal1.mat.broiler.GRCg7b.115.gtf.gz
 
 Now, we have all the files which we require to start the RNA-seq analysis process. 
 
+## RNA-sequencing pipeline followed in the anaylsis:
