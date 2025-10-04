@@ -75,3 +75,12 @@ gunzip Gallus_gallus.bGalGal1.mat.broiler.GRCg7b.115.gtf.gz
 Now, we have all the files which we require to start the RNA-seq analysis process. 
 
 ## RNA-sequencing pipeline followed in the anaylsis:
+1. Trimming and QC using fastp
+2. Alignment using Hisat2
+3. Sorting and indexing using samtools
+4. Read summarization using featureCounts from Subread
+5. Differntial expression analysis in RStudio
+
+
+### Trimming and QC using fastp
+fastp is a fast, all in one FASTQ preprocessor which is primarily designed for quality control (QC), filtering and trimming of next-generation sequencing (NGS) reads. 
