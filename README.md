@@ -119,6 +119,9 @@ fastp \
 conda deactivate fastp
 ```
 
+<img width="634" height="802" alt="image" src="https://github.com/user-attachments/assets/b078715d-47a0-417a-9856-2ff4dcb4c552" />
+
+
 ### Hisat2 alignment
 HISAT2 (Hierarchial Indexing for Spliced Alignment of Transcripts 2) is a fast, memory efficient tool used for aligning RNA-seq reads to a reference genome. Hisat2 is capable of handling the complexities of eukaryotic transcriptomes such as splicing events, alternative isoforms and intron exon boundries meaning Hisat2 is  a splice site aware aligner which is beneficial as compared to standard alingers. 
 
