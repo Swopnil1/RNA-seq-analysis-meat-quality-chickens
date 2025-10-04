@@ -35,4 +35,42 @@ cat sra_explorer_sra_download.sh  | parallel -j 8
 The raw data is in FASTQ format which is required for bulk RNA-sequencing analysis. 
 The FASTQ file format stores nucleotide sequences with corresponding quality scores primarily used for raw sequencing reads from NGS platforms where quality of each base matters. 
 
+## Download reference genome and annotation files
+Now, we have the raw sequencing data in FASTQ format. However, we require additional reference genome file and annotation file as well before we can start our analysis. 
+
+To download the reference genome, we can either do it through NCBI or ENSEMBL. 
+
+```
+mkdir genomes
+cd genomes
+
+# When downloading from NCBI
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/016/699/485/GCF_016699485.2_bGalGal1.mat.broiler.GRCg7b/GCF_016699485.2_bGalGal1.mat.broiler.GRCg7b_genomic.fna.gz
+gunzip GCF_016699485.2_bGalGal1.mat.broiler.GRCg7b_genomic.fna.gz
+```
+
+```
+# When downloading from ENSEMBL
+wget https://ftp.ensembl.org/pub/release-115/fasta/gallus_gallus/dna/Gallus_gallus.bGalGal1.mat.broiler.GRCg7b.dna.toplevel.fa.gz
+gunzip Gallus_gallus.bGalGal1.mat.broiler.GRCg7b.dna.toplevel.fa.gz
+````
+
+Similarly, download the annotation file (in our case in .GTF file format) from
+
+```
+mkdir annotation
+cd annotation
+
+# When downloading from NCBI
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/016/699/485/GCF_016699485.2_bGalGal1.mat.broiler.GRCg7b/GCF_016699485.2_bGalGal1.mat.broiler.GRCg7b_genomic.gtf.gz
+gunzip GCF_016699485.2_bGalGal1.mat.broiler.GRCg7b_genomic.gtf.gz
+```
+
+```
+# When downloading from ENSEMBL
+wget https://ftp.ensembl.org/pub/release-115/gtf/gallus_gallus/Gallus_gallus.bGalGal1.mat.broiler.GRCg7b.115.gtf.gz
+gunzip Gallus_gallus.bGalGal1.mat.broiler.GRCg7b.115.gtf.gz
+```
+
+Now, we have all the files which we require to start the RNA-seq analysis process. 
 
