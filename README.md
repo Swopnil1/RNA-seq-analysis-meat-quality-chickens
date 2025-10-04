@@ -83,4 +83,58 @@ Now, we have all the files which we require to start the RNA-seq analysis proces
 
 
 ### Trimming and QC using fastp
-fastp is a fast, all in one FASTQ preprocessor which is primarily designed for quality control (QC), filtering and trimming of next-generation sequencing (NGS) reads. 
+fastp is a fast, all in one FASTQ preprocessor which is primarily designed for quality control (QC), filtering and trimming of next-generation sequencing (NGS) reads. Few other major functions of fastp includes adapter trimming, length filtering and quality control reporting by generating HTML and JSON reports. 
+
+> create conda enviroment to install the required dependencies which we use
+```
+conda create -n fastp -c bioconda fastp
+conda activate fastp
+
+conda install -c bioconda fastp -y
+```
+
+> We create a file samples.txt which contains only the sample names of each samples and not include each prefix.
+```
+ls *_sample_1.fastq.gz | sed 's/_sample_1.fastq.gz//' > samples.txt
+cat samples.txt
+
+```
+
+```
+# Making use of GNU parallel to trim multiple samples simultaneously.
+mkdir -p trimmed
+cd trimmed
+
+cat samples.txt | parallel -j 8 '
+fastp \
+  -i {}_sample_1.fastq.gz \
+  -I {}_sample_2.fastq.gz \
+  -o trimmed/{}_R1.trimmed.fastq.gz \
+  -O trimmed/{}_R2.trimmed.fastq.gz \
+  -w 8 \
+  -h trimmed/{}_fastp.html \
+  -j trimmed/{}_fastp.json
+'
+
+conda deactivate fastp
+```
+
+### Hisat2 alignment
+HISAT2 (Hierarchial Indexing for Spliced Alignment of Transcripts 2) is a fast, memory efficient tool used for aligning RNA-seq reads to a reference genome. Hisat2 is capable of handling the complexities of eukaryotic transcriptomes such as splicing events, alternative isoforms and intron exon boundries meaning Hisat2 is  a splice site aware aligner which is beneficial as compared to standard alingers. 
+
+> Create conda enviroment for Hisat2
+```
+conda create -n hisat2
+conda activate hisat2
+
+conda install -c bioconda hisat2 -y
+
+# to check if hisat2 is installed properly
+hisat2 --version
+```
+
+> Hisat2 requires building a reference index
+```
+hisat2-build /path/to/reference/genome.fa genome_index
+```
+
