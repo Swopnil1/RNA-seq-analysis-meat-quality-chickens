@@ -138,6 +138,30 @@ hisat2 --version
 
 > Hisat2 requires building a reference index
 ```
+# genome_index is the index prefix name
 hisat2-build /path/to/reference/genome.fa genome_index
 ```
+
+```
+mkdir -p ../data/raw/trimmed/sam
+cd ../data/raw/trimmed
+
+# again we can use the samples.txt containing the samples name without the prefix.
+
+cat samples.txt | parallel -j 8 ' hisat2 -p 8 \ -x /path/to/reference/genome.fa genome_index \ -1 {}_R1.trimmed.fastq.gz \ -2 {}_R2.trimmed.fastq.gz \ -S aligned/{}.sam '
+```
+> During the trimming step we still have paired ends reads for example sample1_R1 and sample1_R2. However, after the alignment step we would have only one read for each sample, meaning in our analysis we go from 24 samples after the trimming step to 12 samples after the alignment.
+
+
+### Sorting and indexing SAM files 
+For the next step we require to convert SAM -> BAM to make the downstream analysis process faster and compatible with the modern bioinfomratics tools. 
+
+Sorting by using genomic coordinates is crucial for downstream process as it orders the alignments based on their positions within the reference genome. 
+
+> Since BAM files are binary files simply using 'less' or 'head' to view the files would not work. We would need to use samtools.
+```
+samtools view -h sample_name.bam | less -S
+```
+<img width="300" height="255" alt="image" src="https://github.com/user-attachments/assets/a82f7161-e522-4438-99dd-13ded3e956f0" />
+
 
