@@ -1,0 +1,15 @@
+Status	SRR27194283_mRNAseq_of_Chinese_Dagu_chicken_male_leg_muscle.sorted.bam	SRR27194284_mRNAseq_of_Chinese_Dagu_chicken_male_breast_muscle.sorted.bam	SRR27194285_mRNAseq_of_Chinese_Dagu_chicken_male_breast_muscle.sorted.bam	SRR27194286_mRNAseq_of_Chinese_Dagu_chicken_male_breast_muscle.sorted.bam	SRR27194287_mRNAseq_of_AA_broiler_chicken_male_leg_muscle.sorted.bam	SRR27194288_mRNAseq_of_AA_broiler_chicken_male_leg_muscle.sorted.bam	SRR27194289_mRNAseq_of_AA_broiler_chicken_male_leg_muscle.sorted.bam	SRR27194290_mRNAseq_of_AA_broiler_chicken_male_breast_muscle.sorted.bam	SRR27194291_mRNAseq_of_Chinese_Dagu_chicken_male_leg_muscle.sorted.bam	SRR27194292_mRNAseq_of_Chinese_Dagu_chicken_male_leg_muscle.sorted.bam	SRR27194293_mRNAseq_of_AA_broiler_chicken_male_breast_muscle.sorted.bam	SRR27194294_mRNAseq_of_AA_broiler_chicken_male_breast_muscle.sorted.bam
+Assigned	38181987	42409486	40471779	43983324	41198159	44785820	42108755	42557771	43057729	39976002	41455489	39896097
+Unassigned_Unmapped	5921735	6490263	6077613	7192276	6901526	5570546	5442613	6441310	5561864	5768171	5058909	5139300
+Unassigned_Read_Type	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_Singleton	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_MappingQuality	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_Chimera	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_FragmentLength	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_Duplicate	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_MultiMapping	6937281	7298416	6720085	8912798	6127643	6191679	5983159	7276370	7733874	5964304	7054801	6433053
+Unassigned_Secondary	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_NonSplit	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_NoFeatures	2090719	2277182	1979799	2109663	2626303	3262423	3042291	2572943	2786211	2827943	2341114	2226308
+Unassigned_Overlapping_Length	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_Ambiguity	2451115	2511764	2130287	2727802	2536653	2794575	2535108	2571262	2951821	2799425	2243083	2269474
