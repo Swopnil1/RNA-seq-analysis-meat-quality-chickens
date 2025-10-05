@@ -212,8 +212,25 @@ done
 ```
 <img width="722" height="194" alt="image" src="https://github.com/user-attachments/assets/0b5f5bed-362f-43b3-b20c-16b749fe3b9d" />
 
+### Read summarization using featureCounts
 
+After we have the sorted, indexed BAM files, the next step is to count how many reads overlap to the known genomic features - typically genes, exons or transcripts. 
+featureCounts is a high performance read summarization from the Subread package which produces raw reads counts per feature (genes or exons). 
 
+> Create a conda enviroment for subread
+```
+conda create -n subread -c bioconda subread
+conda activate subread
 
+conda install -c bioconda subread -y
+```
 
-
+```
+mkdir -p ../counts
+featureCounts -T 8 -p -t exon -g gene_id \
+  -a /path/to/annotation.gtf \
+  -o counts/gene_counts.txt \
+  bam_sorted/*.sorted.bam
+```
+Now, we have the gene count matrix which is the primary data for differential expression analysis, clustering and other downstream RNA-seq analyses. 
+It provides a quantitative measure of expression that reflect transcriptional activity. 
