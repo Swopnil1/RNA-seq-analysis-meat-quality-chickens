@@ -234,3 +234,42 @@ featureCounts -T 8 -p -t exon -g gene_id \
 ```
 Now, we have the gene count matrix which is the primary data for differential expression analysis, clustering and other downstream RNA-seq analyses. 
 It provides a quantitative measure of expression that reflect transcriptional activity. 
+
+
+## Differential expression analysis
+For the following steps, we will now move to Rstudio to perform the differential expression analysis using DESeq2 package. 
+
+```
+# set to the current working directory
+setwd("~/path/to/working/directory")
+```
+
+Most of the packages which we use can be found in the Bioconductor project.
+
+```
+# install the required libraries 
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+install.packages("BiocManager") 
+# Install only once if not already installed
+BiocManager::install(c("EnhancedVolcano", "DESeq2"), force = T)
+library(EnhancedVolcano)
+library(DESeq2)
+library(dplyr)
+library(pheatmap)
+library(ggplot2)
+```
+
+> Import the counts data
+```
+feature_counts <- read.table(file="counts.txt", header=TRUE)
+
+# remove the couluns 2:6 as it contains info which we do not need currently (Chr, Start, End, Strand and Length)
+# We are only intrested in the Geneid and the Counts for each of the samples
+feature_counts <- feature_counts[, -c(2:6)]
+head(feature_counts)
+```
+<img width="1424" height="187" alt="image" src="https://github.com/user-attachments/assets/b13f621c-b88b-49ce-973f-1b60b19bddd4" />
+
+
