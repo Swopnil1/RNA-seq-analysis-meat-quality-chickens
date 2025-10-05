@@ -152,16 +152,68 @@ cat samples.txt | parallel -j 8 ' hisat2 -p 8 \ -x /path/to/reference/genome.fa 
 ```
 > During the trimming step we still have paired ends reads for example sample1_R1 and sample1_R2. However, after the alignment step we would have only one read for each sample, meaning in our analysis we go from 24 samples after the trimming step to 12 samples after the alignment.
 
-
 ### Sorting and indexing SAM files 
 For the next step we require to convert SAM -> BAM to make the downstream analysis process faster and compatible with the modern bioinfomratics tools. 
 
 Sorting by using genomic coordinates is crucial for downstream process as it orders the alignments based on their positions within the reference genome. 
 
-> Since BAM files are binary files simply using 'less' or 'head' to view the files would not work. We would need to use samtools.
+> Create samtools enviroment using conda
+```
+conda create -n samtools -c bioconda samtools
+conda activate samtools
+
+conda install -c bioconda samtools -y
+```
+
+```
+mkdir -p ../alignments/bam
+ls aligned/*.sam | sed 's/.sam//' | parallel -j 8 '
+samtools sort -@ 8 -o bam{/}.sorted.bam {}.sam
+'
+ # followed by indexing the sorted bam files
+
+ ls bam_sorted/*.sorted.bam | parallel -j 8 'samtools index {}'
+# This will create .bai index files for each sorted bam file
+```
+
+> Since BAM files are binary files simply using 'less' or 'head' to view the files would not work. We would need to use samtools to view the BAM files. 
 ```
 samtools view -h sample_name.bam | less -S
 ```
-<img width="300" height="255" alt="image" src="https://github.com/user-attachments/assets/a82f7161-e522-4438-99dd-13ded3e956f0" />
+<img width="292" height="239" alt="image" src="https://github.com/user-attachments/assets/a3f8b398-4e01-48fa-abc5-322708bc44ce" />
+
+### Flagstat summary 
+In the next step, we will do a flagstat summary using samtools which focuses more on the detailed technical QC snapshot of each sample. It reports counts and percentages for the various alignment catergories - mapped properly, paired, duplicates and singeltons. 
+
+> It is a crucial step, as it assess the quality and integrity of each of the individual sample's alignemnt.
+
+```
+# Run flagstat
+mkdir -p flagstat_reports
+ls bam_sorted/*.sorted.bam | parallel -j 8 '
+samtools flagstat {} > flagstat_reports/{/.}.flagstat.txt
+'
+```
+<img width="612" height="244" alt="image" src="https://github.com/user-attachments/assets/31d61802-45d3-40f9-ab1d-53e844f4a604" />
+
+### Mapping summary
+Mapping summary is simply a summarized table which contains all the key statistics from multiple flagsta files in the analysis. It helps compare alignment quality scores across all samples at a glance and identify failed runs. 
+
+```
+echo -e "Sample\tTotal\tMapped\tPercentMapped" > mapping_summary.tsv
+
+for f in flagstat_reports/*.flagstat.txt; do
+    sample=$(basename "$f" .sorted.flagstat.txt)
+    total=$(grep "in total" "$f" | awk '{print $1}')
+    mapped=$(grep " mapped (" "$f" | head -n1 | awk '{print $1}')
+    percent=$(grep " mapped (" "$f" | head -n1 | awk -F'[()%]' '{print $2}')
+    echo -e "${sample}\t${total}\t${mapped}\t${percent}" >> mapping_summary.tsv
+done
+```
+<img width="722" height="194" alt="image" src="https://github.com/user-attachments/assets/0b5f5bed-362f-43b3-b20c-16b749fe3b9d" />
+
+
+
+
 
 
