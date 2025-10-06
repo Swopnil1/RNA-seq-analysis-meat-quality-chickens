@@ -4,6 +4,8 @@ Swopnil Pradhan
 
 Octotber 1, 2025
 
+Data set: PRJNA105178
+
 ## Introduction
 RNA sequencing is a high throughput technique used to study the transcriptome (the complete set of RNA molecules within a cell at a given time). 
 
